@@ -337,6 +337,8 @@
  // navbar
  nav {
    position: relative;
+   max-width: 1400px;
+   margin: 0 auto;
    width: 100%;
    height: 56px;
 
@@ -474,6 +476,8 @@
  // Main-content
 
  .main-content {
+   max-width: 1400px;
+   margin: 0 auto;
    width: 100%;
 
    .container {
@@ -880,6 +884,8 @@
 
  // footer
  footer {
+   max-width: 1400px;
+   margin: 0 auto;
    .container {
      display: none;
    }
