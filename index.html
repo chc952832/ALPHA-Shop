@@ -16,7 +16,7 @@
   <nav>
     <div class="container">
       <div class="logo">
-        <img class="nav-logo" src="./src/image/logo.png" alt="logo-picture">
+        <div class="nav-logo"></div>
       </div>
       <input type="checkbox" class="navbar-toggle" id="navbar-toggle">
       <div class="menu">
@@ -28,9 +28,10 @@
           <li class="nav-item">聯絡我們</li>
         </ul>
         <div class="nav-icons">
-          <img class="nav-icon" src="./src/image/icon1.png" alt="icon">
-          <img class="nav-icon" src="./src/image/icon2.png" alt="icon">
-          <img class="nav-icon" src="./src/image/icon3.png" alt="icon">
+          <div class="nav-icon search-icon"></div>
+          <div class="nav-icon cart-icon"></div>
+          <div class="nav-icon mode-toggle-icon">
+          </div>
         </div>
       </div>
       <label for="navbar-toggle" class="navbar-toggle-label">
@@ -114,8 +115,8 @@
                 <div class="part d-none">
                   <h4 class="form-title">運送方式</h4>
                   <div class="forms">
-                    <div class="form-row delivery-option">
-                      <input type="radio" name="delivery-option" id="delivery-standard">
+                    <div class="form-row delivery-option active">
+                      <input type="radio" name="delivery-option" id="delivery-standard" checked>
                       <label for="" class="label-text delivery-info">
                         <p class="delivery-standard">標準運送</p>
                         <p class="delivery-time">約3~7個工作天</p>
@@ -163,7 +164,7 @@
         <!-- button control -->
         <div id="btn-control" class="btn-panel">
           <button class="btn-previous btn v-hidden">←　上一步</button>
-          <button class="btn-next btn w-100">→　下一步</button>
+          <button class="btn-next btn">→　下一步</button>
         </div>
       </div>
       <!-- right -->
@@ -216,7 +217,8 @@
       <div class="container">
         <div class="footer-wrapper">
           <div class="footer-logo">
-            <img class="footer-logo-picture" src="./src/image/logo.png" alt="logo-picture">
+            <div class="footer-logo-picture">
+            </div> 
           </div>
           <div class="informations">
             <div class="info">

@@ -11,6 +11,7 @@ const cartProducts = [
   }
 ]
 
+////變數
 const productWrapper = document.querySelector('.product-wrapper')
 const stepPanel = document.querySelector('.step-panel')
 const steps = stepPanel.querySelectorAll('.step') 
@@ -20,9 +21,11 @@ const connectLine = document.querySelectorAll('.connect-line')
 const btnControl = document.getElementById('btn-control')
 const prevBtn = document.querySelector('.btn-previous')
 const nextBtn = document.querySelector('.btn-next')
+const navIcons = document.querySelector('.nav-icons')
 let total = 5298
 let step = 0
 let deliveryFee = 0
+let mode = 'light'
 
 
 
@@ -30,37 +33,44 @@ let deliveryFee = 0
 
 // 根據按鈕控制step樣式
 function handleStepControl(event) {
+  // 預防頁面重整
   event.preventDefault()
   const nowStep = steps[step]
   if (event.target.classList.contains('btn-next') && step < 2) {
     const nextStep = steps[step + 1]
+    // 調整這一步跟下一步的step樣式
     nowStep.classList.remove('active')
     nowStep.classList.add('checked')
     nextStep.classList.add('active')
     formPart[step].classList.toggle('d-none')
     formPart[step + 1].classList.toggle('d-none')
     step += 1
+    // connect line樣式調整
     if (step === 1){
       connectLine[1].classList.add('active')
     }
   } else if (event.target.classList.contains('btn-previous')) {
     const prevStep = steps[step - 1]
+    // 調整這一步跟上一步的step樣式
     nowStep.classList.remove('active')
     prevStep.classList.remove('checked')
     prevStep.classList.add('active')
     formPart[step].classList.toggle('d-none')
     formPart[step - 1].classList.toggle('d-none')
     step -= 1
+    // connect line樣式
     if (step === 1) {
       connectLine[1].classList.remove('active')
     }
   }
+  // 按鈕樣式調整
   setBtnDisabled()
 }
 
 // form button control
 function setBtnDisabled() {
   if (step === 0) {
+    // 第一步時隱藏上一步按鈕
     prevBtn.classList.add('v-hidden')
     prevBtn.setAttribute('disabled', 'disabled')
   } else {
@@ -68,12 +78,13 @@ function setBtnDisabled() {
     prevBtn.classList.remove('v-hidden')
   }
   if (step === 2 ) {
+    // 最後一步時改變按鈕內容
     nextBtn.innerHTML = '確認下單'
   } else {
     nextBtn.innerHTML = '下一步 →'
   }
 }
-
+// 控制運費區塊樣式, 並連帶調整cart區塊運費及總額
 function handleDeliveryStyle(event) {
   let totalPrice = document.querySelector('.total-price')
   if (event.target.id === 'delivery-DHL' && deliveryFee === 0) {
@@ -146,12 +157,23 @@ function handleCartBtns(event) {
   totalPrice.innerHTML = '$' + total.toLocaleString()
 }
 
+// 更改畫面深淺模式
+function changeMode(event) {
+  if (event.target.classList.contains('mode-toggle-icon') && mode === 'light') {
+  mode = 'dark'
+  document.documentElement.setAttribute('data-theme', 'dark')
+  } else if (event.target.classList.contains('mode-toggle-icon') && mode === 'dark') {
+    mode = 'light'
+    document.documentElement.setAttribute('data-theme', 'light')
+  }
+}
+
 // 渲染購物車商品頁面
 renderCartElement()
 
-// 購物籃加減按鈕功能
+// 綁上事件監聽器進行事件監聽
 productWrapper.addEventListener('click', handleCartBtns)
 btnControl.addEventListener('click', handleStepControl)
 formContent.addEventListener('click', handleDeliveryStyle)
-
+navIcons.addEventListener('click', changeMode)
 
