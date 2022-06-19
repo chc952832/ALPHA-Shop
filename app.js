@@ -1,5 +1,5 @@
 const cartProducts = [
-  { 
+  {
     name: '破壞補丁修身牛仔褲',
     imgUrl: 'product-img-1',
     price: '3,999'
@@ -14,11 +14,12 @@ const cartProducts = [
 ////變數
 const productWrapper = document.querySelector('.product-wrapper')
 const stepPanel = document.querySelector('.step-panel')
-const steps = stepPanel.querySelectorAll('.step') 
+const steps = stepPanel.querySelectorAll('.step')
 const formContent = document.querySelector('.form-content')
 const formPart = formContent.querySelectorAll('.part')
 const connectLine = document.querySelectorAll('.connect-line')
 const btnControl = document.getElementById('btn-control')
+const btnPanelContainer = document.querySelector('.btn-panel-container')
 const prevBtn = document.querySelector('.btn-previous')
 const nextBtn = document.querySelector('.btn-next')
 const navIcons = document.querySelector('.nav-icons')
@@ -46,7 +47,7 @@ function handleStepControl(event) {
     formPart[step + 1].classList.toggle('d-none')
     step += 1
     // connect line樣式調整
-    if (step === 1){
+    if (step === 1) {
       connectLine[1].classList.add('active')
     }
   } else if (event.target.classList.contains('btn-previous')) {
@@ -71,13 +72,21 @@ function handleStepControl(event) {
 function setBtnDisabled() {
   if (step === 0) {
     // 第一步時隱藏上一步按鈕
-    prevBtn.classList.add('v-hidden')
+    prevBtn.classList.add('d-none')
     prevBtn.setAttribute('disabled', 'disabled')
+    btnPanelContainer.classList.remove('justify-content-between')
+    btnPanelContainer.classList.add('justify-content-end')
+    nextBtn.classList.add('w-100')
+    nextBtn.classList.remove('w-40')
   } else {
     prevBtn.removeAttribute('disabled')
-    prevBtn.classList.remove('v-hidden')
+    prevBtn.classList.remove('d-none')
+    btnPanelContainer.classList.remove('justify-content-end')
+    btnPanelContainer.classList.add('justify-content-between')
+    nextBtn.classList.add('w-40')
+    nextBtn.classList.remove('w-100')
   }
-  if (step === 2 ) {
+  if (step === 2) {
     // 最後一步時改變按鈕內容
     nextBtn.innerHTML = '確認下單'
   } else {
@@ -103,11 +112,11 @@ function handleDeliveryStyle(event) {
     total -= 500
     deliveryFeeText.innerHTML = '免費'
     totalPrice.innerHTML = '$' + total.toLocaleString()
-  } 
+  }
 }
 
 // 渲染購物籃清單
-function renderCartElement(){
+function renderCartElement() {
   let rawHTML = ""
   cartProducts.forEach(product => {
     rawHTML += `<div class="product">
@@ -140,7 +149,7 @@ function renderCartElement(){
 function handleCartBtns(event) {
   let target = event.target
   let totalPrice = document.querySelector('.total-price')
-  let productPrice = Number(target.parentElement.nextElementSibling.innerText.slice(1).replace(',',''))
+  let productPrice = Number(target.parentElement.nextElementSibling.innerText.slice(1).replace(',', ''))
   if (target.classList.contains('minus-btn')) {
     let amount = Number(target.nextElementSibling.innerText)
     if (amount > 1) {
@@ -160,8 +169,8 @@ function handleCartBtns(event) {
 // 更改畫面深淺模式
 function changeMode(event) {
   if (event.target.classList.contains('mode-toggle-icon') && mode === 'light') {
-  mode = 'dark'
-  document.documentElement.setAttribute('data-theme', 'dark')
+    mode = 'dark'
+    document.documentElement.setAttribute('data-theme', 'dark')
   } else if (event.target.classList.contains('mode-toggle-icon') && mode === 'dark') {
     mode = 'light'
     document.documentElement.setAttribute('data-theme', 'light')
@@ -170,6 +179,8 @@ function changeMode(event) {
 
 // 渲染購物車商品頁面
 renderCartElement()
+// 渲染初始表單按鈕
+setBtnDisabled()
 
 // 綁上事件監聽器進行事件監聽
 productWrapper.addEventListener('click', handleCartBtns)

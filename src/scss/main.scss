@@ -130,6 +130,7 @@
  
  $sizes: (
    25: 25%,
+   40: 40%,
    50: 50%,
    75: 75%,
    100: 100%
@@ -410,6 +411,7 @@
        .nav-icons {
          display: flex;
          padding: 1.5rem;
+         padding-right: 0;
          justify-content: center;
 
          .nav-icon {
@@ -428,6 +430,7 @@
            &.mode-toggle-icon {
             background: var(--mode-toggle-icon);
             background-size: 20px;
+            margin-right:0;
            }
          }
        }
@@ -769,29 +772,38 @@
        // button control
        .btn-panel {
          position: absolute;
-         border-top: 1px solid var(--decoration-line-color);
          padding: 24px 0;
          bottom: -500px;
          width: 100%;
          display: flex;
-         justify-content: space-between;
-
-         .btn {
-           width: 40%;
-           padding: 12px 15px;
-           font-size: 14px;
-           border-radius: 8px;
-           &.btn-next {
+         .btn-panel-container {
+          // display: flex;
+          // justify-content: space-between;
+          width: 100%;
+          border-top: 1px solid var(--decoration-line-color);
+          padding-top: 24px;
+          .btn {
+            // width: 40%;
+            height: 46px;
+            padding: 12px 15px;
+            font-size: 14px;
+            border-radius: 8px;
+        
+            &.btn-next {
               background-color: var(--pink);
               font-size: 14px;
               font-weight: 500;
               color: var(--keep-white);
             }
-          &.btn-previous {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--black);
+        
+            &.btn-previous {
+              font-size: 14px;
+              font-weight: 500;
+              color: var(--black);
+            }
           }
+
+         
          }
 
        }
@@ -884,14 +896,12 @@
 
  // footer
  footer {
-   max-width: 1400px;
-   margin: 0 auto;
-   .container {
+   .footer-container {
      display: none;
    }
  }
 
- @media screen and (min-width: 375px) {
+ @media screen and (min-width: 376px) {
 
    // Navbar
    nav {
@@ -966,6 +976,8 @@
        //left 
        .left {
          grid-column: 1/2;
+         display: flex;
+         flex-direction: column;
 
          // step panel
          .step-panel {
@@ -1044,7 +1056,15 @@
 
          // button control
          .btn-panel {
-           bottom: -50px;
+           position: static;
+           flex: 1;
+           align-items: flex-end;
+           padding: 0;
+           .btn-panel-container {
+            .btn {
+              width: 30%;
+            }
+           }
          }
        }
 
@@ -1102,13 +1122,16 @@
      height: 284px;
      margin-top: 120px;
 
-     .container {
-       all: unset;
+     .footer-container {
+       display: block;
+       height: 100%;
+       max-width: 1400px;
        width: 90%;
        margin: 0 auto;
-       height: 100%;
 
        .footer-wrapper {
+         width: 90%;
+         margin: 0 auto;
          height: 100%;
          display: flex;
          align-items: center;
